@@ -1,58 +1,21 @@
-*This project has been created as part
-of the 42 curriculum by TortoizCode.*
+*This project has been created as part of the 42 curriculum by rodmorei*
 
 ## Description
-philosophers-42 is a C implementation of the classic Dining Philosophers concurrency problem, a standard 42 curriculum project. The goal is to learn and demonstrate correct use of threads/processes, synchronization primitives (mutexes/semaphores), and timing to avoid data races, deadlocks, and starvation while simulating philosophers who alternate between thinking, eating, and sleeping.
+Philosophers is a C implementation of the Dining Philosophers concurrency problem, with the objective of learning how to implement threads/processes, utilizing mutexes in order to avoid data races and other possible issues to come.
 
-The program launches a configurable number of philosophers and simulates their lifecycle while enforcing the constraints of the assignment (time to die/eat/sleep and optional number of meals). It reports state changes (taking forks, eating, sleeping, thinking, death) in a deterministic, timestamped way.
+The program launched with 4 or 5 arguments, this being : number of philosophers, the time they take to die, the time they take to eat, the time they take to sleep and the optional argument of the number of times each philosopher must eat (after which the program ends).
+
+The general idea is that each philosopher sits at a dining table, and brings a fork. In order to eat, a philosopher needs 2 forks (so you need at least 2 philosophers, or else the philosopher will just starve). After taking 2 forks, the philosopher eats, puts down his forks, sleeps, thinks and repeats the process. Since they share forks, philosophers must manage (without communicating) the usage of their forks so that everyone eats and doesn't starve. Depending on the variables (time to eat, time to die, etc.) this may be impossible and one philosopher might starve. If it IS possible though, they should all live and eat indefinitely or until the optional variable "number of times each philosopher must eat" is met.
 
 ## Instructions
-### Requirements
-- A POSIX environment (Linux/macOS)
-- A C compiler (e.g., `cc`, `gcc`, or `clang`)
-- `make`
-
-### Build
-From the repository root:
-```sh
-make
-```
-Common targets (if provided by the project Makefile):
-```sh
-make clean
-make fclean
-make re
-```
-
-### Run
-Typical usage (philo / philosophers):
-```sh
-./philo <number_of_philosophers> <time_to_die> <time_to_eat> <time_to_sleep> [number_of_times_each_philosopher_must_eat]
-```
-Example:
-```sh
-./philo 5 800 200 200
-./philo 5 800 200 200 7
-```
-Arguments are usually expressed in milliseconds.
-
-> Note: The exact binary name and arguments depend on the project variant and Makefile in this repository. If your executable is named differently (e.g., `philosophers`), adjust the commands accordingly.
+To create the program run "make" in the shell. Then "./philo" plus the 4 or 5 arguments mentioned in front. Make sure these numbers are valid and not absurdly high or low numbers. Then just see your philosophers try to survive while juggling forks!
 
 ## Resources
-### Classic references
-- The Dining Philosophers problem (overview): https://en.wikipedia.org/wiki/Dining_philosophers_problem
-- POSIX Threads Programming (pthreads):
-  - `pthread_create`, `pthread_join`: https://man7.org/linux/man-pages/man3/pthread_create.3.html
-  - Mutexes (`pthread_mutex_*`): https://man7.org/linux/man-pages/man3/pthread_mutex_init.3p.html
-- Semaphores (if applicable):
-  - `sem_open`, `sem_wait`, `sem_post`: https://man7.org/linux/man-pages/man3/sem_open.3.html
-- Time measurement:
-  - `gettimeofday`: https://man7.org/linux/man-pages/man2/gettimeofday.2.html
-  - `clock_gettime`: https://man7.org/linux/man-pages/man2/clock_gettime.2.html
-- Concurrency pitfalls:
-  - Deadlock: https://en.wikipedia.org/wiki/Deadlock
-  - Starvation: https://en.wikipedia.org/wiki/Starvation_(computer_science)
 
-### How AI was used
-- Drafting: AI (ChatGPT / GitHub Copilot) was used to draft this README structure and wording.
-- No code generation claim: This README does not assert that AI generated any portion of the project source code. If AI was used to write, refactor, or debug code in this repository, add details here specifying the exact files/parts and tasks (e.g., “mutex strategy review”, “race condition debugging”, “argument parsing improvements”).
+- The gitbook of course: https://42-cursus.gitbook.io/guide/3-rank-03/philosophers ;
+
+- Dining Philosophers problem on Wikipedia: https://en.wikipedia.org/wiki/Dining_philosophers_problem ;
+
+- Man pages for thread creation and mutexes;
+
+- This guy to explain deadlocking and asymetric fork picking: https://medium.com/@kaustubh.saha/dining-philosophers-problem-2b7370bd0f3e ;
