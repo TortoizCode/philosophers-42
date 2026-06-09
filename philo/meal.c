@@ -36,6 +36,8 @@ void	*ph_handle(void	*ph)
 	pthread_mutex_lock(&philo->data->data_mtx);
 	philo->data->nb_running++;
 	pthread_mutex_unlock(&philo->data->data_mtx);
+	if (philo->id % 2 == 1)
+		usleep(100);
 	while (!end_table(philo->data))
 	{
 		ft_eat(philo);
@@ -69,7 +71,10 @@ void	*monitor_handle(void	*data)
 
 void	one_philo(t_data *data)
 {
-	printf("%ld %i has taken a fork\n", ms_time_get(), 1);
+	long	time;
+
+	time = ms_time_get();
+	printf("%ld %i has taken a fork\n", (ms_time_get() - time), 1);
 	usleep(data->time_die * 1000);
-	printf("%ld %i died\n", ms_time_get(), 1);
+	printf("%ld %i died\n", (ms_time_get() - time), 1);
 }

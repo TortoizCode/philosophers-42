@@ -47,5 +47,15 @@ void	ft_sleep(t_philo *philo)
 
 void	ft_think(t_philo *philo)
 {
+	long	think_time;
+
+	think_time = 0;
 	print_state(philo, 3);
+	if (philo->data->nb_philo % 2 == 1)
+	{
+		think_time = (philo->data->time_eat * 2 - philo->data->time_sleep);
+		if (think_time < 0)
+			think_time = 0;
+	}
+	usleep(think_time * 1000);
 }
